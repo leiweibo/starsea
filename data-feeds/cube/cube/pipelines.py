@@ -11,6 +11,7 @@ from cube.spiders.hdf5 import Hdf5Utils
 from cube.models.cube_profit_wrapper import cube_profit_wrapper_to_dict
 from cube.models.cube_rebalancing_history_item_wrapper import cube_rebalance_history_item_wrapper_to_dict
 from cube.models.cube_rebalancing_item_wrapper import cube_rebalance_item_wrapper_to_dict
+from cube.models.cube_item_wrapper import cube_item_wrapper_to_dict
 
 
 

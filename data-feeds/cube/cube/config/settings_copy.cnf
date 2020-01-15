@@ -1,0 +1,8 @@
+[DEFAULT]
+XUEQIU_ACCT = xxx
+XUEQIU_PASSWD = xxx
+REDIS_HOST = xxx
+REDIS_PASSWD = xxx
+
+[docker]
+REDIS_HOST = redis

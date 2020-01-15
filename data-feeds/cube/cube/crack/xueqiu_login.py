@@ -8,8 +8,8 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from cube.config.config_helper import get_config
 
-from cube.config.cube_settings import *
 from cube.crack.crack_helper import *
 from cube.crack.easing import *
 
@@ -28,6 +28,9 @@ class CrackXueQiu(object):
         self.chrome_options = webdriver.ChromeOptions()
         self.chrome_options.add_argument('--window-size=1920,1080')
         self.chrome_options.add_argument('--start-maximized')
+        # 此步骤很重要，设置为开发者模式，防止被各大网站识别出来使用了Selenium
+        self.chrome_options.add_experimental_option('excludeSwitches',
+                                                    ['enable-automation'])
         self.chrome_options.add_argument('--headless')
         self.chrome_options.add_argument('--disable-gpu')
         self.chrome_options.add_experimental_option("detach", True)
@@ -35,6 +38,9 @@ class CrackXueQiu(object):
         self.wait = WebDriverWait(self.browser, 20)
         self.max_retry_cnt = 3
         self.retried_cnt = 0
+
+        self.xueqiu_passwd = get_config('XUEQIU_PASSWD')
+        self.xueqiu_acct = get_config('XUEQIU_ACCT')
 
     def prepare_for_login(self):
         """
@@ -46,8 +52,8 @@ class CrackXueQiu(object):
         login_btn.click()
         user_name = self.wait.until(EC.presence_of_element_located((By.NAME, 'username')))
         password = self.wait.until(EC.presence_of_element_located((By.NAME, 'password')))
-        user_name.send_keys(XUEQIU_ACCT)
-        password.send_keys(XUEQIU_PASSWD)
+        user_name.send_keys(self.xueqiu_acct)
+        password.send_keys(self.xueqiu_passwd)
         real_login_btn = self.wait.until(
             EC.element_to_be_clickable((By.CLASS_NAME, 'Loginmodal_btn-active_2oj')))
         real_login_btn.click()

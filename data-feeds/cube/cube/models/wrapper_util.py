@@ -53,6 +53,26 @@ def from_float(x: Any) -> float:
     return float(x)
 
 
+def from_float_string(x: Any) -> float:
+    assert isinstance(x, (str, float))
+    try:
+        return float(x)
+    except:
+        pass
+    assert False
+
+
+def from_int_string(x: Any) -> float:
+    assert isinstance(x, (str, int))
+    try:
+        if '' == x:
+            return 0
+        return int(x)
+    except:
+        pass
+    assert False
+
+
 def to_float(x: Any) -> float:
     assert isinstance(x, float)
     return x

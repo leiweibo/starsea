@@ -21,5 +21,6 @@ h5py = "*"
 tables = "*"
 redis = "*"
 
+
 [requires]
 python_version = "3.7"
